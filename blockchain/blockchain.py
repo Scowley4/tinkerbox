@@ -7,7 +7,7 @@ class Block(object):
         self.data = data
         self.timestamp = time.time()
         self.prev_hash = prev_hash
-        self.hash ='' 
+        self.hash =''
         self.nonce = 0
         self.hash = self.calculate_hash()
 
@@ -29,6 +29,8 @@ class Block(object):
             'hash':self.hash, 'nonce':self.nonce}
         return str(d)
 
+
+
 class Blockchain(object):
     def __init__(self, difficulty=2):
         self.chain = [self.create_genesis()]
@@ -40,7 +42,7 @@ class Blockchain(object):
     def get_last_block(self):
         return self.chain[-1]
 
-    def add_block(self,block):
+    def add_block(self, block):
         block.prev_hash = self.get_last_block().hash
         block.mine_block(self.difficulty)
         self.chain.append(block)
@@ -67,7 +69,9 @@ class Blockchain(object):
             string+=block.__str__()+sep
         return string
 
-def time_blockchains(diff_min=1, diff_max=5, blocks=10):
+
+
+def time_blockchains(diff_min=1, diff_max=4, blocks=10):
     chains = {}
     for diff in range(diff_min, diff_max+1):
         bc = Blockchain(diff)
